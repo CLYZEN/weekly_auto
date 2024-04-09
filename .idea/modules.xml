@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kr.damda.weekly.main.iml" filepath="$PROJECT_DIR$/.idea/modules/kr.damda.weekly.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/weekly.iml" filepath="$PROJECT_DIR$/.idea/weekly.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/weekly.weekly.main~1.iml" filepath="$PROJECT_DIR$/.idea/modules/weekly.weekly.main~1.iml" />
     </modules>
   </component>
 </project>
