@@ -2,8 +2,9 @@ package kr.damda.weekly.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
+
+import kr.damda.weekly.dto.request.SingleRequestDto;
 import kr.damda.weekly.service.IotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,21 +22,41 @@ public class IotController {
         this.iotService = iotService;
     }
 
-    @GetMapping("/iot/device/count")
-    public String getIotDeviceCount() {
-        return "index";
+    @GetMapping("/api/v1/search/single")
+    public String getIotDeviceCount(Model model) {
+        model.addAttribute("singleRequestDto", new SingleRequestDto());
+        return "single_request";
     }
 
-    @PostMapping("/weekly")
-    public String getIotDeviceCount(String startDate, String endDate, String device, Model model)
+    @PostMapping("/api/v1/search/single")
+    public String getIotDeviceCount(SingleRequestDto singleRequestDto, Model model)
         throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-        Date start = formatter.parse(startDate);
-        Date end = formatter.parse(endDate);
+        Date start = formatter.parse(singleRequestDto.getStartDate());
+        Date end = formatter.parse(singleRequestDto.getEndDate());
 
-        model.addAttribute("list",iotService.getCountByDeviceId(device, start, end));
-        return "result";
+        model.addAttribute("singleResponseDto", iotService.getSingleDeviceInfo(singleRequestDto.getDeviceId(), start,end));
+
+        return "single_result";
     }
+
+    @GetMapping("/api/v1/search/single/connect")
+    public String getIotDeviceCountForConnStatus(Model model) {
+        model.addAttribute("connRequestDto", new SingleRequestDto());
+        return "conn_request";
+    }
+
+    @PostMapping("/api/v1/search/single/connect")
+    public String getIotDeviceCountForConnStatus(SingleRequestDto connRequestDto, Model model) throws ParseException{
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date start = formatter.parse(connRequestDto.getStartDate());
+        Date end = formatter.parse(connRequestDto.getEndDate());
+
+        model.addAttribute("count",iotService.getCountByDeviceIdAndConnStatus(connRequestDto.getDeviceId(),connRequestDto.getConnStatus(),start,end));
+        return "single_result";
+    }
+
 
 }

@@ -1,12 +1,12 @@
 package kr.damda.weekly.service;
 
-import java.time.LocalDate;
+import kr.damda.weekly.dto.response.SingleResponseDto;
+
 import java.util.Date;
-import java.util.List;
-import kr.damda.weekly.entity.IotDevice;
 
 public interface IotService {
 
-    List<IotDevice> getCountByDeviceId(String deviceId, Date start, Date end);
+    SingleResponseDto getSingleDeviceInfo(String deviceId, Date start, Date end);
 
+    Integer getCountByDeviceIdAndConnStatus(String deviceId,Integer connStatus, Date start, Date end);
 }

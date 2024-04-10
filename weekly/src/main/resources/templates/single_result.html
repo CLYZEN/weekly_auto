@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+  <p>현재 등록 디바이스 : <h1 th:text=" ${singleResponseDto.nowDeviceCount}"></h1></p>
+  <p>현재 연결 디바이스 : <h1 th:text=" ${singleResponseDto.getConnectDeviceCount()}"></h1></p>
+  <p>검색된 날자에 등록된 디바이스 : <h1 th:text=" ${singleResponseDto.getValidateDeviceCount()}"></h1></p>
+  <p>데이터 양 : <h1 th:text=" ${singleResponseDto.getDataVolume()} "></h1>  MB</p>
+</body>
+</html>

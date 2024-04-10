@@ -2,7 +2,7 @@ spring:
   application:
     name: weekly
   config:
-    import: application-dev.yml
+    import: application-dev-home.yml
   jpa:
     hibernate:
       ddl-auto: validate

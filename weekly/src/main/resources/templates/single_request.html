@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <h1>디바이스 별 기기 총 대수 조회</h1>
+  <form action="/api/v1/search/single" method="post" th:object="${singleRequestDto}">
+    <label for="deviceId">디바이스</label>
+    <select id="deviceId" name="deviceId">
+      <option value="---퓨리움---" disabled>---퓨리움---</option>
+      <option value="90000P" >90000P</option>
+      <option value="91000P" >91000P</option>
+      <option value="10000P" >10000P</option>
+      <option value="50000PB" >50000PB</option>
+      <option value="10000PB" >10000PB</option>
+      <option value="10000B" >10000B</option>
+      <option value="20000B" >20000B</option>
+      <option value="20010B" >20010B</option>
+      <option value="30000P" >30000P</option>
+      <option value="30010P" >30010P</option>
+      <option value="50000P" >50000P</option>
+      <option value="30000B" >30000B</option>
+      <option value="---포레---" disabled>---포레---</option>
+      <option value="ECP800" >ECP800</option>
+      <option value="ECP900" >ECP900</option>
+      <option value="ECP700" >ECP700</option>
+      <option value="FG_AWM240" >FG_AWM240</option>
+      <option value="---위니아---" disabled>---위니아---</option>
+      <option value="D2102" >D2102</option>
+      <option value="D2101" >D2101</option>
+    </select>
+    <label for="startDate">시작 날짜</label>
+    <input type="date" id="startDate" name="startDate">
+    <label for="endDate">종료 날짜</label>
+    <input type="date" id="endDate" name="endDate">
+    <button type="submit">검색</button>
+  </form>
+</body>
+</html>
