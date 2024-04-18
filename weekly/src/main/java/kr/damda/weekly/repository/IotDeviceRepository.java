@@ -12,7 +12,9 @@ import org.springframework.stereotype.Repository;
 public interface IotDeviceRepository extends JpaRepository<IotDevice,Long> {
     Integer countByDeviceIdContainingAndCreateTimeBetween(String deviceId, Date start, Date end);
 
-    Integer countByDeviceIdContainsAndCreateTimeBetweenAndConnStatus(String deviceId, Date start, Date end, int connStatus);
+    Integer countByDeviceIdContainsAndCreateTimeBetweenAndConnStatus(String deviceId, Date start, Date end, Integer connStatus);
 
     Integer countByDeviceIdContains(String deviceId);
+
+    Integer countByDeviceIdContainsAndConnStatus(String deviceId, Integer connStatus);
 }

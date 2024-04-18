@@ -15,5 +15,5 @@ public class SingleResponseDto {
 
     private Integer validateDeviceCount;
 
-    private Long dataVolume;
+    private double dataVolume;
 }

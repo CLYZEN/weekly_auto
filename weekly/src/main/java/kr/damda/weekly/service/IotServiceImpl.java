@@ -27,7 +27,7 @@ public class IotServiceImpl implements IotService {
 
         SingleResponseDto singleResponseDto = new SingleResponseDto();
         singleResponseDto.setNowDeviceCount(iotDeviceRepository.countByDeviceIdContains(deviceId));
-        singleResponseDto.setConnectDeviceCount(iotDeviceRepository.countByDeviceIdContainsAndCreateTimeBetweenAndConnStatus(deviceId,start,end,1));
+        singleResponseDto.setConnectDeviceCount(iotDeviceRepository.countByDeviceIdContainsAndConnStatus(deviceId,1));
         singleResponseDto.setValidateDeviceCount(iotDeviceRepository.countByDeviceIdContainingAndCreateTimeBetween(deviceId,start,end));
         singleResponseDto.setDataVolume(avgResourceHistory(deviceId,start,end));
 
@@ -39,15 +39,15 @@ public class IotServiceImpl implements IotService {
         return iotDeviceRepository.countByDeviceIdContainsAndCreateTimeBetweenAndConnStatus(deviceId,start,end,connStatus);
     }
 
-    private Long avgResourceHistory(String deviceId, Date start, Date end) {
-        List<ResourceHistoryAvgDto> resourceHistoryAvgDtoList = iotDeviceResourceHistoryRepository.findByDeviceIdContainsAndCreateTimeBetween(deviceId,start,end);
+    private double avgResourceHistory(String deviceId, Date start, Date end) {
+        List<ResourceHistoryAvgDto> resourceHistoryAvgDtoList = iotDeviceResourceHistoryRepository.findTop100ByDeviceIdStartingWithAndCreateTimeBetween(deviceId,start,end);
+        Integer count = iotDeviceResourceHistoryRepository.countByDeviceIdStartingWithAndCreateTimeBetween(deviceId,start,end);
 
-        long length = 0;
+        double length = 0;
 
         for (ResourceHistoryAvgDto resourceHistoryAvgDto : resourceHistoryAvgDtoList) {
             length += resourceHistoryAvgDto.getResource().getBytes().length;
         }
-
-        return length/1024/1024;
+        return ((double)length/100)*((double)count/1024)/1024;
     }
 }
